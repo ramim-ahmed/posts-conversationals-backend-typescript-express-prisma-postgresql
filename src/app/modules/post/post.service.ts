@@ -8,7 +8,18 @@ const createPost = async (data: Post): Promise<Post> => {
 const getAllPosts = async (): Promise<Partial<Post>[]> => {
   const result = await prisma.post.findMany({
     include: {
-      Like: true,
+      Like: {
+        include: {
+          user: true,
+          post: true,
+        },
+      },
+      Comment: {
+        include: {
+          user: true,
+          post: true,
+        },
+      },
     },
   });
   return result;
