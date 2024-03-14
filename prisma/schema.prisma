@@ -12,6 +12,7 @@ model User {
   name      String
   email     String
   password  String
+  role      Role      @default(USER)
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
   Post      Post[]
@@ -57,4 +58,9 @@ model Like {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("likes")
+}
+
+enum Role {
+  USER
+  ADMIN
 }
